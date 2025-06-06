@@ -34,11 +34,12 @@ class LoadData:
 
 if __name__ == '__main__':
     args = argparse.ArgumentParser()
-    args.add_argument('--input_path', default='data/external/Consignment_pricing.csv', help='Ruta del archivo CSV de entrada usado para entrenar el modelo de predicción')
+    args.add_argument('--input_path', default="https://raw.githubusercontent.com/jmem-ec/KRRCourse/ccbd6ccf8389ba0988d53fc9300a64da00e6368b/Consignment_pricing.csv")
     args.add_argument('--output_path', default='data/raw/Dataset.csv', help='Ruta de salida para guardar los datos')
 
     parsed_args = args.parse_args()
     
-    LoadData().load_data(input_path=parsed_args.input_path, output_path=parsed_args.output_path)
+    #LoadData().load_data(input_path=parsed_args.input_path, output_path=parsed_args.output_path)
 
 
+LoadData().load_data(input_path=parsed_args.input_path, output_path=parsed_args.output_path)
