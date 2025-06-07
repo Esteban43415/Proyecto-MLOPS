@@ -90,3 +90,4 @@ target/
 # Mypy cache
 .mypy_cache/
 /data.csv
+configs/capable-sled-462201-s5-1c5e95837b77
