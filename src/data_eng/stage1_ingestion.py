@@ -1,6 +1,10 @@
 import sys
 import pandas as pd
 import argparse
+import os
+
+import hydra
+from omegaconf import DictConfig
 
 from app_logging import logging
 from app_exception.exception import AppException
@@ -15,15 +19,15 @@ class LoadData:
     def __init__(self):
         self.getdata = GetData()
 
-    def load_data(self, input_path, output_path):
+    def load_data(self, config): 
             
         try:
             logging.info(f"Loading data from the source")
             
-            self.data = self.getdata.get_data(input_path)
-            self.raw_data_path = output_path
+            self.data = self.getdata.get_data(config)
+            self.raw_data_path = config.raw_data.raw_data_dir + "/" + config.raw_data.raw_filename
             self.data.to_csv(self.raw_data_path, sep=',', encoding='utf-8', index=False)
-            logging.info(f"Data Loaded from the source Successfully !!!")
+            logging.info(f"Data Loaded from the source successfully !!!")
         
         except Exception as e:
             logging.info(
@@ -31,15 +35,10 @@ class LoadData:
             raise AppException(e, sys) from e
 
 
+@hydra.main(config_path=f"{os.getcwd()}/configs", config_name="data_eng", version_base=None)
+def main(cfg: DictConfig):
+    logging.basicConfig(level=logging.INFO)
+    LoadData().load_data(cfg)
 
-if __name__ == '__main__':
-    args = argparse.ArgumentParser()
-    args.add_argument('--input_path', default="https://raw.githubusercontent.com/jmem-ec/KRRCourse/ccbd6ccf8389ba0988d53fc9300a64da00e6368b/Consignment_pricing.csv")
-    args.add_argument('--output_path', default='data/raw/Dataset.csv', help='Ruta de salida para guardar los datos')
-
-    parsed_args = args.parse_args()
-    
-    #LoadData().load_data(input_path=parsed_args.input_path, output_path=parsed_args.output_path)
-
-
-LoadData().load_data(input_path=parsed_args.input_path, output_path=parsed_args.output_path)
+if __name__ == "__main__":
+    main()
