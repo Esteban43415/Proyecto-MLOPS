@@ -3,13 +3,10 @@ model_data:
   train_filename: Train_Dataset.csv
   test_data_dir: data/processed
   test_filename: Test_Dataset.csv
-
   target_data: line_item_value
-
   models_dir: models
   file_model: model_rf.pkl
   reports_dir: reports
-
 estimators:
   RandomForestRegressor:
     params:
@@ -19,7 +16,6 @@ estimators:
       min_sample_split: 8
       n_estimators: 80
       oob_score: true
-
 RandomizedSearchCV:
   n_iter: 300
   scoring: r2
