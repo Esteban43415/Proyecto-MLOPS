@@ -1,0 +1,8 @@
+stages:
+  limpieza:
+    cmd: python3 src/data_eng/stage2_cleaning.py
+    deps:
+    - data/raw/Dataset.csv
+    - src/data_eng/stage2_cleaning.py
+    outs:
+    - data/interim/Cleaned_Dataset.csv
