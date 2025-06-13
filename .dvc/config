@@ -3,4 +3,4 @@
 ['remote "gdrive-remote"']
     url = gdrive://1xuS7Lt0oolCD6RihytC3ru1mOHVTIExT
     gdrive_use_service_account = true
-    gdrive_service_account_json_file_path = ../configs/capable-sled-462201-s5-1c5e95837b77.json
+    gdrive_service_account_json_file_path = ../configs/metal-arc-277621-707cab818b51.json
